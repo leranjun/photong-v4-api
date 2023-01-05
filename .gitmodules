@@ -1,0 +1,3 @@
+[submodule "riffusion"]
+	path = utils/components/riffusion_lib
+	url = https://github.com/riffusion/riffusion.git
