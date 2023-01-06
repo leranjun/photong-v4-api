@@ -26,11 +26,13 @@ def image_to_music(
         azure_endpoint (str): The Azure API endpoint.
         hf_token (str): The Hugging Face access token.
         riffusion_seed (int): The seed passed to Riffusion generation.
-        riffusion_seed_img (Optional[str]): The seed image used as the initial image for Riffusion.
+        riffusion_seed_img (Optional[str]): The seed image used
+            as the initial image for Riffusion.
         timeout (Optional[float]): The timeout for API calls.
 
     Returns:
-        dict[str, str | float]: The caption, prompt, audio, and duration. See `InferenceResponse`.
+        dict[str, str | float]: The caption, prompt, audio, and duration.
+            See `InferenceResponse`.
 
     Raises:
         HTTPException: If the API calls fail.
