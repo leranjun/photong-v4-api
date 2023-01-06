@@ -13,19 +13,19 @@ import dacite
 import torch
 from PIL import Image
 
-RIFFUSION_LIB_PATH = Path(__file__).parent / "riffusion_lib"
+RIFFUSION_LIB_PATH = Path(__file__).parent / "libriffusion"
 CHECKPOINT = "riffusion/riffusion-model-v1"
 
 sys.path.append(str(RIFFUSION_LIB_PATH))
 
 # pylint: disable=import-error, wrong-import-position
-from .riffusion_lib.riffusion.datatypes import InferenceInput
-from .riffusion_lib.riffusion.riffusion_pipeline import RiffusionPipeline
-from .riffusion_lib.riffusion.spectrogram_image_converter import (
+from .libriffusion.riffusion.datatypes import InferenceInput
+from .libriffusion.riffusion.riffusion_pipeline import RiffusionPipeline
+from .libriffusion.riffusion.spectrogram_image_converter import (
     SpectrogramImageConverter,
 )
-from .riffusion_lib.riffusion.spectrogram_params import SpectrogramParams
-from .riffusion_lib.riffusion.util import base64_util
+from .libriffusion.riffusion.spectrogram_params import SpectrogramParams
+from .libriffusion.riffusion.util import base64_util
 
 # pylint: enable=import-error, wrong-import-position
 
