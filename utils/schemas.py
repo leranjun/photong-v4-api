@@ -1,23 +1,17 @@
-"""
-Schemas for the API.
-"""
+"""Schemas for the API."""
 # pylint: disable=too-few-public-methods
 
 from pydantic import BaseModel
 
 
 class HealthResponse(BaseModel):
-    """
-    Response schema for health check.
-    """
+    """Response schema for health check."""
 
     message: str
 
 
 class InferenceResponse(BaseModel):
-    """
-    Response schema for inference.
-    """
+    """Response schema for inference."""
 
     caption: str
     prompt: str
@@ -26,9 +20,7 @@ class InferenceResponse(BaseModel):
 
 
 class InferencePromptResponse(BaseModel):
-    """
-    Response schema for inference with prompt.
-    """
+    """Response schema for inference with prompt."""
 
     audio: str
     duration: float
