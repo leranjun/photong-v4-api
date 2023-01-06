@@ -5,6 +5,7 @@ from typing import Optional
 
 import dotenv
 from fastapi import FastAPI, UploadFile
+from fastapi.middleware.cors import CORSMiddleware
 
 from utils import components, pipeline
 from utils.schemas import HealthResponse, InferencePromptResponse, InferenceResponse
@@ -20,6 +21,10 @@ if not azure_endpoint:
 hf_token = os.getenv("HF_TOKEN", "")
 if not hf_token:
     raise AssertionError("HF_TOKEN is not set.")
+cors_origins = os.getenv("CORS_ORIGINS", "")
+if not cors_origins:
+    raise AssertionError("CORS_ORIGINS is not set.")
+cors_origins = cors_origins.split(",")
 
 app = FastAPI(
     title="Photong v4 API",
@@ -34,6 +39,13 @@ app = FastAPI(
     ],
 )
 
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=cors_origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 @app.get("/", tags=["Root"], response_model=HealthResponse)
 async def root() -> dict[str, str]:
