@@ -19,13 +19,18 @@ CHECKPOINT = "riffusion/riffusion-model-v1"
 sys.path.append(str(RIFFUSION_LIB_PATH))
 
 # pylint: disable=import-error, wrong-import-position
-from .libriffusion.riffusion.datatypes import InferenceInput # skipcq: FLK-E402
-from .libriffusion.riffusion.riffusion_pipeline import RiffusionPipeline # skipcq: FLK-E402
+# skipcq: FLK-E402
+from .libriffusion.riffusion.datatypes import InferenceInput
+# skipcq: FLK-E402
+from .libriffusion.riffusion.riffusion_pipeline import RiffusionPipeline
+# skipcq: FLK-E402
 from .libriffusion.riffusion.spectrogram_image_converter import (
     SpectrogramImageConverter,
-) # skipcq: FLK-E402
-from .libriffusion.riffusion.spectrogram_params import SpectrogramParams # skipcq: FLK-E402
-from .libriffusion.riffusion.util import base64_util # skipcq: FLK-E402
+)
+# skipcq: FLK-E402
+from .libriffusion.riffusion.spectrogram_params import SpectrogramParams
+# skipcq: FLK-E402
+from .libriffusion.riffusion.util import base64_util
 
 # pylint: enable=import-error, wrong-import-position
 
