@@ -8,12 +8,8 @@ from typing import Optional
 import dotenv
 from fastapi import FastAPI, UploadFile
 
-from utils import pipeline, components
-from utils.schemas import (
-    HealthResponse,
-    InferenceResponse,
-    InferencePromptResponse,
-)
+from utils import components, pipeline
+from utils.schemas import HealthResponse, InferencePromptResponse, InferenceResponse
 
 dotenv.load_dotenv()
 
