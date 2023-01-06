@@ -14,11 +14,14 @@ from utils.schemas import HealthResponse, InferencePromptResponse, InferenceResp
 dotenv.load_dotenv()
 
 azure_key = os.getenv("AZURE_KEY", "")
-assert azure_key, "AZURE_KEY is not set."
+if not azure_key:
+    raise AssertionError("AZURE_KEY is not set.")
 azure_endpoint = os.getenv("AZURE_ENDPOINT", "")
-assert azure_endpoint, "AZURE_ENDPOINT is not set."
+if not azure_endpoint:
+    raise AssertionError("AZURE_ENDPOINT is not set.")
 hf_token = os.getenv("HF_TOKEN", "")
-assert hf_token, "HF_TOKEN is not set."
+if not hf_token:
+    raise AssertionError("HF_TOKEN is not set.")
 
 app = FastAPI(
     title="Photong v4 API",
