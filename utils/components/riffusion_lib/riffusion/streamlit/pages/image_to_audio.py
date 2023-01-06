@@ -2,7 +2,6 @@ import dataclasses
 
 import streamlit as st
 from PIL import Image
-
 from riffusion.spectrogram_params import SpectrogramParams
 from riffusion.streamlit import util as streamlit_util
 from riffusion.util.image_util import exif_from_image

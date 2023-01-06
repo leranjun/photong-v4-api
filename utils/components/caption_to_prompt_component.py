@@ -2,6 +2,7 @@
 Generate a musical prompt from an image caption.
 """
 from typing import Optional
+
 import requests
 
 PROMPT = """This tool can generate a musical prompt from an image prompt:

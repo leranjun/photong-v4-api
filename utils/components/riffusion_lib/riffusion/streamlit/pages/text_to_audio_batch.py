@@ -3,7 +3,6 @@ import typing as T
 from pathlib import Path
 
 import streamlit as st
-
 from riffusion.spectrogram_params import SpectrogramParams
 from riffusion.streamlit import util as streamlit_util
 
@@ -81,7 +80,10 @@ def render_text_to_audio_batch() -> None:
 
         negative_prompt = entry.get("negative_prompt", None)
 
-        st.write(f"**Prompt**: {entry['prompt']}  \n" + f"**Negative prompt**: {negative_prompt}")
+        st.write(
+            f"**Prompt**: {entry['prompt']}  \n"
+            + f"**Negative prompt**: {negative_prompt}"
+        )
 
         image = streamlit_util.run_txt2img(
             prompt=entry["prompt"],
@@ -116,12 +118,15 @@ def render_text_to_audio_batch() -> None:
             prompt_slug = entry["prompt"].replace(" ", "_")
             negative_prompt_slug = entry.get("negative_prompt", "").replace(" ", "_")
 
-            image_path = output_path / f"image_{i}_{prompt_slug}_neg_{negative_prompt_slug}.jpg"
+            image_path = (
+                output_path / f"image_{i}_{prompt_slug}_neg_{negative_prompt_slug}.jpg"
+            )
             image.save(image_path, format="JPEG")
             entry["image_path"] = str(image_path)
 
             audio_path = (
-                output_path / f"audio_{i}_{prompt_slug}_neg_{negative_prompt_slug}.{output_format}"
+                output_path
+                / f"audio_{i}_{prompt_slug}_neg_{negative_prompt_slug}.{output_format}"
             )
             audio_path.write_bytes(audio_bytes.getbuffer())
             entry["audio_path"] = str(audio_path)

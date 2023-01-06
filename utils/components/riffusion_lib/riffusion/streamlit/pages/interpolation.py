@@ -7,7 +7,6 @@ import numpy as np
 import pydub
 import streamlit as st
 from PIL import Image
-
 from riffusion.datatypes import InferenceInput, PromptInput
 from riffusion.spectrogram_params import SpectrogramParams
 from riffusion.streamlit import util as streamlit_util
@@ -104,7 +103,9 @@ def render_interpolation_demo() -> None:
         init_image = Image.open(init_image_file).convert("RGB")
     else:
         init_image_path = (
-            Path(__file__).parent.parent.parent.parent / "seed_images" / f"{init_image_name}.png"
+            Path(__file__).parent.parent.parent.parent
+            / "seed_images"
+            / f"{init_image_name}.png"
         )
         init_image = Image.open(str(init_image_path)).convert("RGB")
 
@@ -142,7 +143,9 @@ def render_interpolation_demo() -> None:
     st.write("#### Final Output")
 
     # TODO(hayk): Concatenate with better blending
-    audio_segments = [pydub.AudioSegment.from_file(audio_bytes) for audio_bytes in audio_bytes_list]
+    audio_segments = [
+        pydub.AudioSegment.from_file(audio_bytes) for audio_bytes in audio_bytes_list
+    ]
     concat_segment = audio_segments[0]
     for segment in audio_segments[1:]:
         concat_segment = concat_segment.append(segment, crossfade=0)
@@ -162,7 +165,10 @@ def get_prompt_inputs(key: str) -> PromptInput:
     prompt = st.text_input("Prompt", label_visibility="collapsed", key=f"prompt_{key}")
     seed = T.cast(int, st.number_input("Seed", value=42, key=f"seed_{key}"))
     denoising = st.number_input(
-        "Denoising", value=0.75, key=f"denoising_{key}", help="How much to modify the seed image"
+        "Denoising",
+        value=0.75,
+        key=f"denoising_{key}",
+        help="How much to modify the seed image",
     )
     guidance = st.number_input(
         "Guidance",

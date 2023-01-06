@@ -1,7 +1,6 @@
 import numpy as np
 import pydub
 from PIL import Image
-
 from riffusion.spectrogram_converter import SpectrogramConverter
 from riffusion.spectrogram_params import SpectrogramParams
 from riffusion.util import image_util
@@ -56,7 +55,9 @@ class SpectrogramImageConverter:
 
         # Store conversion params in exif metadata of the image
         exif_data = self.p.to_exif()
-        exif_data[SpectrogramParams.ExifTags.MAX_VALUE.value] = float(np.max(spectrogram))
+        exif_data[SpectrogramParams.ExifTags.MAX_VALUE.value] = float(
+            np.max(spectrogram)
+        )
         exif = image.getexif()
         exif.update(exif_data.items())
 

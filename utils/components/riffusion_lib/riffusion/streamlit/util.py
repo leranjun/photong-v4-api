@@ -8,7 +8,6 @@ import streamlit as st
 import torch
 from diffusers import StableDiffusionPipeline
 from PIL import Image
-
 from riffusion.riffusion_pipeline import RiffusionPipeline
 from riffusion.spectrogram_image_converter import SpectrogramImageConverter
 from riffusion.spectrogram_params import SpectrogramParams

@@ -1,7 +1,6 @@
 import typing as T
 
 import streamlit as st
-
 from riffusion.spectrogram_params import SpectrogramParams
 from riffusion.streamlit import util as streamlit_util
 

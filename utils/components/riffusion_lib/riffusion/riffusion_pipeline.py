@@ -12,16 +12,17 @@ import numpy as np
 import torch
 from diffusers.models import AutoencoderKL, UNet2DConditionModel
 from diffusers.pipeline_utils import DiffusionPipeline
-from diffusers.pipelines.stable_diffusion.safety_checker import StableDiffusionSafetyChecker
+from diffusers.pipelines.stable_diffusion.safety_checker import (
+    StableDiffusionSafetyChecker,
+)
 from diffusers.schedulers import DDIMScheduler, LMSDiscreteScheduler, PNDMScheduler
 from diffusers.utils import logging
 from huggingface_hub import hf_hub_download
 from PIL import Image
-from transformers import CLIPFeatureExtractor, CLIPTextModel, CLIPTokenizer
-
 from riffusion.datatypes import InferenceInput
 from riffusion.external.prompt_weighting import get_weighted_text_embeddings
 from riffusion.util import torch_util
+from transformers import CLIPFeatureExtractor, CLIPTextModel, CLIPTokenizer
 
 logger = logging.get_logger(__name__)  # pylint: disable=invalid-name
 
@@ -81,7 +82,9 @@ class RiffusionPipeline(DiffusionPipeline):
         device = torch_util.check_device(device)
 
         if device == "cpu" or device.lower().startswith("mps"):
-            print(f"WARNING: Falling back to float32 on {device}, float16 is unsupported")
+            print(
+                f"WARNING: Falling back to float32 on {device}, float16 is unsupported"
+            )
             dtype = torch.float32
 
         pipeline = RiffusionPipeline.from_pretrained(
@@ -223,7 +226,9 @@ class RiffusionPipeline(DiffusionPipeline):
             generator_start = torch.Generator(device="cpu").manual_seed(start.seed)
             generator_end = torch.Generator(device="cpu").manual_seed(end.seed)
         else:
-            generator_start = torch.Generator(device=self.device).manual_seed(start.seed)
+            generator_start = torch.Generator(device=self.device).manual_seed(
+                start.seed
+            )
             generator_end = torch.Generator(device=self.device).manual_seed(end.seed)
 
         # Text encodings
@@ -304,7 +309,9 @@ class RiffusionPipeline(DiffusionPipeline):
         # duplicate text embeddings for each generation per prompt, using mps friendly method
         bs_embed, seq_len, _ = text_embeddings.shape
         text_embeddings = text_embeddings.repeat(1, num_images_per_prompt, 1)
-        text_embeddings = text_embeddings.view(bs_embed * num_images_per_prompt, seq_len, -1)
+        text_embeddings = text_embeddings.view(
+            bs_embed * num_images_per_prompt, seq_len, -1
+        )
 
         # here `guidance_scale` is defined analog to the guidance weight `w` of equation (2)
         # of the Imagen paper: https://arxiv.org/pdf/2205.11487.pdf . `guidance_scale = 1`
@@ -317,7 +324,9 @@ class RiffusionPipeline(DiffusionPipeline):
             elif isinstance(negative_prompt, str):
                 uncond_tokens = [negative_prompt]
             elif batch_size != len(negative_prompt):
-                raise ValueError("The length of `negative_prompt` should be equal to batch_size.")
+                raise ValueError(
+                    "The length of `negative_prompt` should be equal to batch_size."
+                )
             else:
                 uncond_tokens = negative_prompt
 
@@ -329,7 +338,9 @@ class RiffusionPipeline(DiffusionPipeline):
                 truncation=True,
                 return_tensors="pt",
             )
-            uncond_embeddings = self.text_encoder(uncond_input.input_ids.to(self.device))[0]
+            uncond_embeddings = self.text_encoder(
+                uncond_input.input_ids.to(self.device)
+            )[0]
 
             # duplicate unconditional embeddings for each generation per prompt
             uncond_embeddings = uncond_embeddings.repeat_interleave(
@@ -357,10 +368,16 @@ class RiffusionPipeline(DiffusionPipeline):
 
         # add noise to latents using the timesteps
         noise_a = torch.randn(
-            init_latents.shape, generator=generator_a, device=self.device, dtype=latents_dtype
+            init_latents.shape,
+            generator=generator_a,
+            device=self.device,
+            dtype=latents_dtype,
         )
         noise_b = torch.randn(
-            init_latents.shape, generator=generator_b, device=self.device, dtype=latents_dtype
+            init_latents.shape,
+            generator=generator_b,
+            device=self.device,
+            dtype=latents_dtype,
         )
         noise = torch_util.slerp(interpolate_alpha, noise_a, noise_b)
         init_latents_orig = init_latents
@@ -370,7 +387,9 @@ class RiffusionPipeline(DiffusionPipeline):
         # eta (η) is only used with the DDIMScheduler, it will be ignored for other schedulers.
         # eta corresponds to η in DDIM paper: https://arxiv.org/abs/2010.02502
         # and should be between [0, 1]
-        accepts_eta = "eta" in set(inspect.signature(self.scheduler.step).parameters.keys())
+        accepts_eta = "eta" in set(
+            inspect.signature(self.scheduler.step).parameters.keys()
+        )
         extra_step_kwargs = {}
         if accepts_eta:
             extra_step_kwargs["eta"] = eta
@@ -403,7 +422,9 @@ class RiffusionPipeline(DiffusionPipeline):
                 )
 
             # compute the previous noisy sample x_t -> x_t-1
-            latents = self.scheduler.step(noise_pred, t, latents, **extra_step_kwargs).prev_sample
+            latents = self.scheduler.step(
+                noise_pred, t, latents, **extra_step_kwargs
+            ).prev_sample
 
             if mask is not None:
                 init_latents_proper = self.scheduler.add_noise(

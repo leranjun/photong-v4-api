@@ -69,7 +69,9 @@ def render_sample_clips() -> None:
         clip_start_ms = np.random.randint(0, segment_duration_ms - duration_ms)
         clip = segment[clip_start_ms : clip_start_ms + duration_ms]
 
-        clip_name = f"clip_{i}_start_{clip_start_ms}_ms_duration_{duration_ms}_ms.{extension}"
+        clip_name = (
+            f"clip_{i}_start_{clip_start_ms}_ms_duration_{duration_ms}_ms.{extension}"
+        )
 
         st.write(f"#### Clip {i + 1} / {num_clips} -- `{clip_name}`")
 

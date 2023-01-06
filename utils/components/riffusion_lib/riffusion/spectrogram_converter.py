@@ -4,7 +4,6 @@ import numpy as np
 import pydub
 import torch
 import torchaudio
-
 from riffusion.spectrogram_params import SpectrogramParams
 from riffusion.util import audio_util, torch_util
 
@@ -111,7 +110,9 @@ class SpectrogramConverter:
         Returns:
             spectrogram: (channel, frequency, time)
         """
-        assert int(audio.frame_rate) == self.p.sample_rate, "Audio sample rate must match params"
+        assert (
+            int(audio.frame_rate) == self.p.sample_rate
+        ), "Audio sample rate must match params"
 
         # Get the samples as a numpy array in (batch, samples) shape
         waveform = np.array([c.get_array_of_samples() for c in audio.split_to_mono()])

@@ -14,7 +14,6 @@ import dacite
 import flask
 import PIL
 from flask_cors import CORS
-
 from riffusion.datatypes import InferenceInput, InferenceOutput
 from riffusion.riffusion_pipeline import RiffusionPipeline
 from riffusion.spectrogram_image_converter import SpectrogramImageConverter

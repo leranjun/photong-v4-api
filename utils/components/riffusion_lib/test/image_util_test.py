@@ -1,6 +1,5 @@
 import numpy as np
 import pydub
-
 from riffusion.spectrogram_converter import SpectrogramConverter
 from riffusion.spectrogram_params import SpectrogramParams
 from riffusion.util import image_util
@@ -57,7 +56,9 @@ class ImageUtilTest(TestCase):
 
         # Check the median values
         self.assertTrue(
-            np.allclose(np.median(spectrogram), np.median(spectrogram_reversed), rtol=0.05)
+            np.allclose(
+                np.median(spectrogram), np.median(spectrogram_reversed), rtol=0.05
+            )
         )
 
         # Make sure all values are somewhat similar, but allow for discretization error

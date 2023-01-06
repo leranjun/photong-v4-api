@@ -3,7 +3,6 @@ import typing as T
 
 import pydub
 from PIL import Image
-
 from riffusion.spectrogram_image_converter import SpectrogramImageConverter
 from riffusion.spectrogram_params import SpectrogramParams
 from riffusion.util import fft_util
@@ -87,8 +86,12 @@ class SpectrogramImageConverterTest(TestCase):
         # Check params
         self.assertEqual(segments["default"].channels, 2 if use_stereo else 1)
         self.assertEqual(segments["original"].channels, segments["default"].channels)
-        self.assertEqual(segments["original"].frame_rate, segments["default"].frame_rate)
-        self.assertEqual(segments["original"].sample_width, segments["default"].sample_width)
+        self.assertEqual(
+            segments["original"].frame_rate, segments["default"].frame_rate
+        )
+        self.assertEqual(
+            segments["original"].sample_width, segments["default"].sample_width
+        )
 
         # TODO(hayk): Test something more rigorous about the quality of the reconstruction.
 

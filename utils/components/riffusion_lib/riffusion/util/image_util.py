@@ -6,7 +6,6 @@ import typing as T
 
 import numpy as np
 from PIL import Image
-
 from riffusion.spectrogram_params import SpectrogramParams
 
 
