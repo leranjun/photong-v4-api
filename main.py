@@ -47,6 +47,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+
 @app.get("/", tags=["Root"], response_model=HealthResponse)
 async def root() -> dict[str, str]:
     """Root endpoint for the API."""
