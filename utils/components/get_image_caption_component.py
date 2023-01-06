@@ -1,6 +1,4 @@
-"""
-Generate image caption.
-"""
+"""Generate image caption."""
 from typing import Optional
 from urllib.parse import urljoin
 

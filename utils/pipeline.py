@@ -1,6 +1,4 @@
-"""
-Pipeline for generating music from an image.
-"""
+"""Pipeline for generating music from an image."""
 
 from typing import Optional
 

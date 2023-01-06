@@ -1,6 +1,4 @@
-"""
-Main application file for the API.
-"""
+"""Main application file for the API."""
 
 import os
 from typing import Optional
@@ -39,9 +37,7 @@ app = FastAPI(
 
 @app.get("/", tags=["Root"], response_model=HealthResponse)
 async def root() -> dict[str, str]:
-    """
-    Root endpoint for the API.
-    """
+    """Root endpoint for the API."""
     return {"message": "Server is running."}
 
 
@@ -49,9 +45,7 @@ async def root() -> dict[str, str]:
 async def infer(
     file: UploadFile, seed: int, seed_img: Optional[str] = None
 ) -> dict[str, str | float]:
-    """
-    Generate music from an image.
-    """
+    """Generate music from an image."""
     img = await file.read()
     return pipeline.image_to_music(
         img,
@@ -69,9 +63,7 @@ async def infer(
 async def infer_with_prompt(
     prompt: str, seed: int, seed_img: Optional[str] = None
 ) -> dict[str, str | float]:
-    """
-    Generate music from a prompt.
-    """
+    """Generate music from a prompt."""
     audio, duration = components.generate_music(
         prompt,
         seed=seed,

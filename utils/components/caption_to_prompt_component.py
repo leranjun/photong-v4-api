@@ -1,6 +1,4 @@
-"""
-Generate a musical prompt from an image caption.
-"""
+"""Generate a musical prompt from an image caption."""
 from typing import Optional
 
 import requests
