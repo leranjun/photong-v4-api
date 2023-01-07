@@ -1,5 +1,4 @@
 """Main application file for the API."""
-
 import os
 from typing import Optional
 
@@ -12,19 +11,19 @@ from utils.schemas import HealthResponse, InferencePromptResponse, InferenceResp
 
 dotenv.load_dotenv()
 
-azure_key = os.getenv("AZURE_KEY", "")
-if not azure_key:
-    raise AssertionError("AZURE_KEY is not set.")
-azure_endpoint = os.getenv("AZURE_ENDPOINT", "")
-if not azure_endpoint:
-    raise AssertionError("AZURE_ENDPOINT is not set.")
-hf_token = os.getenv("HF_TOKEN", "")
-if not hf_token:
-    raise AssertionError("HF_TOKEN is not set.")
-cors_origins = os.getenv("CORS_ORIGINS", "")
-if not cors_origins:
-    raise AssertionError("CORS_ORIGINS is not set.")
-cors_origins = cors_origins.split(",")
+AZ_KEY = os.getenv("AZURE_KEY", "")
+if not AZ_KEY:
+    raise ValueError("AZURE_KEY environment variable not set.")
+AZ_ENDPOINT = os.getenv("AZURE_ENDPOINT", "")
+if not AZ_ENDPOINT:
+    raise ValueError("AZURE_ENDPOINT environment variable not set.")
+HF_TOKEN = os.getenv("HF_TOKEN", "")
+if not HF_TOKEN:
+    raise ValueError("HF_TOKEN environment variable not set.")
+CORS_ORIGIN_STR = os.getenv("CORS_ORIGINS", "")
+if not CORS_ORIGIN_STR:
+    raise ValueError("CORS_ORIGINS environment variable not set.")
+CORS_ORIGINS = CORS_ORIGIN_STR.split(",")
 
 app = FastAPI(
     title="Photong v3 API",
@@ -41,8 +40,8 @@ app = FastAPI(
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=cors_origins,
-    allow_credentials=True,
+    allow_origins=CORS_ORIGINS,
+    allow_credentials=True if CORS_ORIGINS[0] != "*" else False,
     allow_methods=["*"],
     allow_headers=["*"],
 )
@@ -62,9 +61,9 @@ async def infer(
     img = await file.read()
     return pipeline.image_to_music(
         img,
-        azure_key=azure_key,
-        azure_endpoint=azure_endpoint,
-        hf_token=hf_token,
+        azure_key=AZ_KEY,
+        azure_endpoint=AZ_ENDPOINT,
+        hf_token=HF_TOKEN,
         riffusion_seed=seed,
         riffusion_seed_img=seed_img,
     )
