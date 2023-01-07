@@ -27,9 +27,9 @@ if not cors_origins:
 cors_origins = cors_origins.split(",")
 
 app = FastAPI(
-    title="Photong v4 API",
-    description="The backend generator for Photong v4.",
-    version="4.0.0",
+    title="Photong v3 API",
+    description="The backend generator for Photong v3.",
+    version="3.0.0",
     openapi_tags=[
         {"name": "Root", "description": "Root endpoint for the API."},
         {
