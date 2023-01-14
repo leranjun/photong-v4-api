@@ -11,12 +11,12 @@ from utils.schemas import HealthResponse, InferencePromptResponse, InferenceResp
 
 dotenv.load_dotenv()
 
-AZ_KEY = os.getenv("AZURE_KEY", "")
+AZ_KEY = os.getenv("AZ_CV_KEY", "")
 if not AZ_KEY:
-    raise ValueError("AZURE_KEY environment variable not set.")
-AZ_ENDPOINT = os.getenv("AZURE_ENDPOINT", "")
+    raise ValueError("AZ_CV_KEY environment variable not set.")
+AZ_ENDPOINT = os.getenv("AZ_CV_ENDPOINT", "")
 if not AZ_ENDPOINT:
-    raise ValueError("AZURE_ENDPOINT environment variable not set.")
+    raise ValueError("AZ_CV_ENDPOINT environment variable not set.")
 HF_TOKEN = os.getenv("HF_TOKEN", "")
 if not HF_TOKEN:
     raise ValueError("HF_TOKEN environment variable not set.")
@@ -55,7 +55,7 @@ async def root() -> dict[str, str]:
 
 @app.post("/infer", tags=["Inference"], response_model=InferenceResponse)
 async def infer(
-    file: UploadFile, seed: int, seed_img: Optional[str] = None
+    file: UploadFile, seed: int, alpha: float = 0.25, seed_img: Optional[str] = None
 ) -> dict[str, str | float]:
     """Generate music from an image."""
     img = await file.read()
@@ -65,6 +65,7 @@ async def infer(
         azure_endpoint=AZ_ENDPOINT,
         hf_token=HF_TOKEN,
         riffusion_seed=seed,
+        riffusion_alpha=alpha,
         riffusion_seed_img=seed_img,
     )
 
@@ -73,12 +74,13 @@ async def infer(
     "/infer/with-prompt", tags=["Inference"], response_model=InferencePromptResponse
 )
 async def infer_with_prompt(
-    prompt: str, seed: int, seed_img: Optional[str] = None
+    prompt: str, seed: int, alpha: float = 0.25, seed_img: Optional[str] = None
 ) -> dict[str, str | float]:
     """Generate music from a prompt."""
     audio, duration = components.generate_music(
         prompt,
         seed=seed,
+        alpha=alpha,
         seed_img=seed_img,
     )
     return {

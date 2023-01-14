@@ -12,6 +12,7 @@ def image_to_music(
     azure_endpoint: str,
     hf_token: str,
     riffusion_seed: int,
+    riffusion_alpha: float,
     riffusion_seed_img: Optional[str] = None,
     timeout: Optional[float] = None,
 ) -> dict[str, str | float]:
@@ -24,6 +25,7 @@ def image_to_music(
         azure_endpoint (str): The Azure API endpoint.
         hf_token (str): The Hugging Face access token.
         riffusion_seed (int): The seed passed to Riffusion generation.
+        riffusion_alpha (float): The alpha passed to Riffusion generation.
         riffusion_seed_img (Optional[str]): The seed image used
             as the initial image for Riffusion.
         timeout (Optional[float]): The timeout for API calls.
@@ -37,7 +39,9 @@ def image_to_music(
     """
     caption = get_image_caption(data, azure_key, azure_endpoint, timeout=timeout)
     prompt = caption_to_prompt(caption, hf_token, timeout=timeout)
-    audio, duration = generate_music(prompt, riffusion_seed, riffusion_seed_img)
+    audio, duration = generate_music(
+        prompt, riffusion_seed, riffusion_alpha, riffusion_seed_img
+    )
     return {
         "caption": caption,
         "prompt": prompt,

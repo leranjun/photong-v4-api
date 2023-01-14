@@ -9,7 +9,7 @@ import sys
 from pathlib import Path
 from typing import Optional
 
-import dacite
+import dacite.core
 import torch
 from PIL import Image
 
@@ -55,7 +55,7 @@ converter = SpectrogramImageConverter(
 
 
 def generate_music(
-    prompt: str, seed: int, seed_img: Optional[str] = "og_beat"
+    prompt: str, seed: int, alpha: float, seed_img: Optional[str] = "og_beat"
 ) -> tuple[str, float]:
     """
     Generate music from a prompt using the Riffusion API.
@@ -63,22 +63,25 @@ def generate_music(
     Parameters:
         prompt (str): The prompt to use.
         seed (int): The seed to use.
+        alpha (float): The alpha to use.
         seed_img (Optional[str]): The seed image to use.
 
     Returns:
         tuple[str, float]: A tuple of the base-64 encoded audio URL
             and the duration of the audio.
     """
+    seed_img = seed_img or "og_beat"
+
     seed_img_path = Path(RIFFUSION_LIB_PATH / "seed_images" / f"{seed_img}.png")
     if not seed_img_path.exists():
         seed_img_path = Path(RIFFUSION_LIB_PATH / "seed_images" / "og_beat.png")
 
-    inputs = dacite.from_dict(
+    inputs = dacite.core.from_dict(
         InferenceInput,
         {
-            "alpha": 0.75,
+            "alpha": alpha,
             "num_inference_steps": 20,
-            "seed_image_id": "og_beat",
+            "seed_image_id": seed_img,
             "start": {
                 "prompt": prompt,
                 "seed": seed,
@@ -87,7 +90,7 @@ def generate_music(
             },
             "end": {
                 "prompt": prompt,
-                "seed": seed,
+                "seed": seed + 1,
                 "denoising": 0.75,
                 "guidance": 7.0,
             },
