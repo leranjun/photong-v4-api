@@ -7,9 +7,8 @@ from fastapi.responses import PlainTextResponse
 
 # from api_settings import AZ_SCHEME, SETTINGS
 from api_settings import SETTINGS
-from utils.schemas import HealthResponse
-
 from inference_router import router
+from utils.schemas import HealthResponse
 
 app = FastAPI(
     title="Photong v3 API",
