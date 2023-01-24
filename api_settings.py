@@ -2,11 +2,6 @@
 
 from pydantic import AnyHttpUrl, BaseSettings, Field
 
-# from fastapi_azure_auth import (
-#     B2CMultiTenantAuthorizationCodeBearer,
-#     MultiTenantAzureAuthorizationCodeBearer,
-# )
-
 
 class Settings(BaseSettings):
     """Settings for the API."""
@@ -65,28 +60,3 @@ class Settings(BaseSettings):
 
 
 SETTINGS = Settings()
-
-# __APP_BASE_DOMAIN = (
-#     f"https://{SETTINGS.AZ_AD_TENANT_DOMAIN}/{SETTINGS.AZ_AD_APP_CLIENT_ID}"
-# )
-# __OAUTH_BASE_DOMAIN = f"https://login.microsoftonline.com/{SETTINGS.AZ_TENANT_ID}"
-
-# AZ_SCHEME = MultiTenantAzureAuthorizationCodeBearer(
-# AZ_SCHEME = B2CMultiTenantAuthorizationCodeBearer(
-#     app_client_id=SETTINGS.AZ_AD_APP_CLIENT_ID,
-#     openid_config_use_app_id=True,
-#     scopes={
-#         f"{__APP_BASE_DOMAIN}/user_impersonation": "user_impersonation",
-#     },
-#     validate_iss=False,
-# )
-# AZ_SCHEME_DOCS = B2CMultiTenantAuthorizationCodeBearer(
-#     app_client_id=SETTINGS.AZ_AD_APP_CLIENT_ID,
-#     openapi_authorization_url=f"{__OAUTH_BASE_DOMAIN}/oauth2/v2.0/authorize",
-#     openapi_token_url=f"{__OAUTH_BASE_DOMAIN}/oauth2/v2.0/token",
-#     openid_config_url=f"{__OAUTH_BASE_DOMAIN}/v2.0/.well-known/openid-configuration",
-#     scopes={
-#         f"{__APP_BASE_DOMAIN}/user_impersonation": "user_impersonation",
-#     },
-#     validate_iss=False,
-# )

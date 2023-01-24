@@ -1,10 +1,8 @@
 """Inference router."""
 from typing import Optional
 
-# from fastapi import APIRouter, Security, UploadFile
 from fastapi import APIRouter, UploadFile
 
-# from api_settings import AZ_SCHEME, SETTINGS
 from api_settings import SETTINGS
 from utils import components, pipeline
 from utils.schemas import InferencePromptResponse, InferenceResponse
@@ -12,7 +10,6 @@ from utils.schemas import InferencePromptResponse, InferenceResponse
 router = APIRouter(
     prefix="/infer",
     tags=["Inference"],
-    # dependencies=[Security(AZ_SCHEME)],
 )
 
 
