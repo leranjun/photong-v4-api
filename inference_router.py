@@ -13,7 +13,7 @@ router = APIRouter(
 )
 
 
-@router.post("/", response_model=InferenceResponse)
+@router.post("", response_model=InferenceResponse)
 async def infer(
     file: UploadFile, seed: int, alpha: float = 0.25, seed_img: Optional[str] = None
 ) -> dict[str, str | float]:
