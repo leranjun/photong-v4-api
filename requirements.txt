@@ -25,7 +25,7 @@ orjson==3.8.4
 packaging==22.0
 Pillow==9.4.0
 pip==22.3.1
-plotly==5.11.0
+plotly==5.13.0
 pycparser==2.21
 pydantic==1.10.4
 pydub==0.25.1
