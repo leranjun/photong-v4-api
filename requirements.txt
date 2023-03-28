@@ -55,5 +55,5 @@ urllib3==1.26.15
 uvicorn==0.21.1
 watchfiles==0.18.1
 websockets==10.4
-wheel==0.38.4
+wheel==0.40.0
 zipp==3.12.1
