@@ -8,7 +8,7 @@ dacite==1.8.1
 diffusers==0.17.0
 dnspython==2.3.0
 email-validator==2.0.0.post2
-fastapi==0.96.0
+fastapi==0.96.1
 filelock==3.12.1
 h11==0.14.0
 httpcore==0.17.2
