@@ -14,7 +14,7 @@ h11==0.14.0
 httpcore==0.18.0
 httptools==0.6.0
 httpx==0.25.0
-huggingface-hub==0.17.1
+huggingface-hub==0.17.2
 idna==3.4
 importlib-metadata==6.8.0
 itsdangerous==2.1.2
@@ -56,4 +56,4 @@ uvicorn==0.23.2
 watchfiles==0.20.0
 websockets==11.0.3
 wheel==0.41.2
-zipp==3.16.2
+zipp==3.17.0
