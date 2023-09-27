@@ -5,7 +5,7 @@ charset-normalizer==3.2.0
 click==8.1.7
 colorama==0.4.6
 dacite==1.8.1
-diffusers==0.21.2
+diffusers==0.21.3
 dnspython==2.4.2
 email-validator==2.0.0.post2
 fastapi==0.103.1
@@ -48,7 +48,7 @@ torch==2.0.1
 torchaudio==2.0.2
 torchvision==0.15.2
 tqdm==4.66.1
-transformers==4.33.2
+transformers==4.33.3
 typing_extensions==4.8.0
 ujson==5.8.0
 urllib3==2.0.5
