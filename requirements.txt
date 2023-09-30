@@ -1,7 +1,7 @@
 anyio==3.7.1
 certifi==2023.7.22
 cffi==1.16.0
-charset-normalizer==3.2.0
+charset-normalizer==3.3.0
 click==8.1.7
 colorama==0.4.6
 dacite==1.8.1
