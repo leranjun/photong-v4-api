@@ -53,7 +53,7 @@ typing_extensions==4.8.0
 ujson==5.8.0
 urllib3==2.0.6
 uvicorn==0.23.2
-watchfiles==0.20.0
+watchfiles==0.21.0
 websockets==11.0.3
 wheel==0.41.2
 zipp==3.17.0
