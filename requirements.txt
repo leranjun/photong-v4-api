@@ -9,7 +9,7 @@ diffusers==0.21.4
 dnspython==2.4.2
 email-validator==2.1.0.post1
 fastapi==0.104.1
-filelock==3.13.0
+filelock==3.13.1
 h11==0.14.0
 httpcore==0.18.0
 httptools==0.6.1
