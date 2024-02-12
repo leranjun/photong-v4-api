@@ -43,7 +43,7 @@ soundfile==0.12.1
 sox==1.4.1
 starlette==0.37.1
 tenacity==8.2.3
-tokenizers==0.15.1
+tokenizers==0.15.2
 torch==2.2.0
 torchaudio==2.2.0
 torchvision==0.17.0
