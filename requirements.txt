@@ -6,7 +6,7 @@ click==8.1.7
 colorama==0.4.6
 dacite==1.8.1
 diffusers==0.26.3
-dnspython==2.6.0
+dnspython==2.6.1
 email-validator==2.1.0.post1
 fastapi==0.109.2
 filelock==3.13.1
