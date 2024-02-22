@@ -44,9 +44,9 @@ sox==1.4.1
 starlette==0.37.1
 tenacity==8.2.3
 tokenizers==0.15.2
-torch==2.2.0
-torchaudio==2.2.0
-torchvision==0.17.0
+torch==2.2.1
+torchaudio==2.2.1
+torchvision==0.17.1
 tqdm==4.66.2
 transformers==4.38.1
 typing_extensions==4.9.0
