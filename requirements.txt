@@ -52,7 +52,7 @@ transformers==4.38.2
 typing_extensions==4.10.0
 ujson==5.9.0
 urllib3==2.2.1
-uvicorn==0.27.1
+uvicorn==0.28.0
 watchfiles==0.21.0
 websockets==11.0.3
 wheel==0.42.0
