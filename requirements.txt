@@ -5,7 +5,7 @@ charset-normalizer==3.3.2
 click==8.1.7
 colorama==0.4.6
 dacite==1.8.1
-diffusers==0.27.1
+diffusers==0.27.2
 dnspython==2.6.1
 email-validator==2.1.1
 fastapi==0.110.0
@@ -52,7 +52,7 @@ transformers==4.38.2
 typing_extensions==4.10.0
 ujson==5.9.0
 urllib3==2.2.1
-uvicorn==0.28.1
+uvicorn==0.29.0
 watchfiles==0.21.0
 websockets==11.0.3
 wheel==0.43.0
